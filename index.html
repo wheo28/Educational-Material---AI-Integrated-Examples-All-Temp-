@@ -1,248 +1,193 @@
-<script>
-const chapters = [
-  {
-    n:1,
-    roman:"I",
-    file:"Ch01/index.html",
-    title:"Introduction to <em>Ethics</em>",
-    desc:"Foundational definitions, frameworks, and the language of ethical practice in financial services.",
-    key:"csr481_ch01_v1"
-  },
-  {
-    n:2,
-    roman:"II",
-    file:"Ch02/index.html",
-    title:"Ethical <em>Theories</em>",
-    desc:"Utilitarianism, deontology, virtue ethics, fiduciary principles — the four lenses for analysing dilemmas.",
-    key:"csr481_ch02_v1"
-  },
-  {
-    n:3,
-    roman:"III",
-    file:"Ch03/index.html",
-    title:"Ethical <em>Decision-Making</em>",
-    desc:"Johnson's five-step model, public-disclosure, role-model, empathy tests, and structured reasoning.",
-    key:"csr481_ch03_v1"
-  },
-  {
-    n:4,
-    roman:"IV",
-    file:"Ch04/index.html",
-    title:"The <em>Ethical Mind</em>",
-    desc:"Fraud Triangle and Fraud Diamond — pressure, opportunity, rationalisation, and capability.",
-    key:"csr481_ch04_v1"
-  },
-  {
-    n:5,
-    roman:"V",
-    file:"Ch05/index.html",
-    title:"<em>Regulatory</em> Frameworks",
-    desc:"From the Securities Act through Dodd-Frank — how U.S. financial regulation evolved.",
-    key:"csr481_ch05_v1"
-  },
-  {
-    n:6,
-    roman:"VI",
-    file:"Ch06/index.html",
-    title:"From Misconduct to <em>Oversight</em>",
-    desc:"SEC, FINRA, CFP Board, state regulators — who enforces what, and through what mechanisms.",
-    key:"csr481_ch06_v1"
-  },
-  {
-    n:7,
-    roman:"VII",
-    file:"Ch07/index.html",
-    title:"<em>Risk Mitigation</em>",
-    desc:"How firms operationalise compliance through controls, audits, training, governance, and leadership.",
-    key:"csr481_ch07_v1"
-  },
-  {
-    n:8,
-    roman:"VIII",
-    file:"Ch08/index.html",
-    title:"<em>Client-Facing</em> Ethics",
-    desc:"Integrity, fairness, accountability, and transparency — the four pillars of advisor practice.",
-    key:"csr481_ch08_v1"
-  },
-  {
-    n:9,
-    roman:"IX",
-    file:"Ch09/index.html",
-    title:"Insider Trading &amp; <em>Market Manipulation</em>",
-    desc:"From insider information to market distortion — conduct, law, and enforcement.",
-    key:"csr481_ch09_v1"
-  },
-  {
-    n:10,
-    roman:"X",
-    file:"Ch10/index.html",
-    title:"<em>Data Privacy</em> &amp; Cybersecurity",
-    desc:"GLBA, CCPA, GDPR, DORA, cybersecurity principles, and major breach cases.",
-    key:"csr481_ch10_v1"
-  },
-  {
-    n:11,
-    roman:"XI",
-    file:"Ch11/index.html",
-    title:"<em>Fair Treatment</em> of Clients",
-    desc:"Procedural, interactional, and distributive fairness — operationalising what fairness looks like.",
-    key:"csr481_ch11_v1"
-  },
-  {
-    n:12,
-    roman:"XII",
-    file:"Ch12/index.html",
-    title:"Firm-Level <em>Ethics</em> &amp; Culture",
-    desc:"Firm culture, incentives, governance, leadership, and organizational conditions that shape ethical conduct.",
-    key:"csr481_ch12_v1"
-  },
-  {
-    n:13,
-    roman:"XIII",
-    file:"Ch13/index.html",
-    title:"Developing an <em>Ethical Firm Culture</em>",
-    desc:"Jondle &amp; Mitchell's five attributes, turnaround cases, and structural levers for culture.",
-    key:"csr481_ch13_v1"
-  },
-  {
-    n:14,
-    roman:"XIV",
-    file:"Ch14/index.html",
-    title:"<em>Emerging Trends</em>",
-    desc:"AI/ML, RegTech, DLT, Open Banking, Cloud — five technologies and five behavioural dynamics.",
-    key:"csr481_ch14_v1"
-  },
-  {
-    n:15,
-    roman:"XV",
-    file:"Ch15/index.html",
-    title:"<em>Ethics</em> in a Digital Age",
-    desc:"The SR 11-7 control loop, EU AI Act, DORA, UK Consumer Duty, and CFPB §1033.",
-    key:"csr481_ch15_v1"
-  },
-  {
-    n:16,
-    roman:"XVI",
-    file:"Ch16/index.html",
-    title:"<em>Conclusion</em> &amp; Future Directions",
-    desc:"Nine integrating themes and capstone cases that connect ethics, compliance, and technology.",
-    key:"csr481_ch16_v1"
-  }
-];
-
-function readProgress(key){
-  if(!key) return null;
-
-  try{
-    const raw = localStorage.getItem(key);
-    if(!raw) return null;
-
-    const data = JSON.parse(raw);
-
-    if(data.answers && typeof data.answers === "object"){
-      const answered = Object.keys(data.answers).length;
-      const total = data.totalQuestions || data.quizTotal || 0;
-      return {answered, total};
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI-Integrated Educational Examples</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 1000px;
+      margin: 60px auto;
+      padding: 0 24px;
+      line-height: 1.6;
+      background: #f7f2e8;
+      color: #1a1612;
     }
 
-    if(data.quizSubmitted && typeof data.quizSubmitted === "object"){
-      const answered = Object.values(data.quizSubmitted).filter(Boolean).length;
-      const total = data.totalQuestions || data.quizTotal || 0;
-      return {answered, total};
+    h1 {
+      font-size: 2.4rem;
+      margin-bottom: 10px;
     }
 
-    if(data.quizAnswers && typeof data.quizAnswers === "object"){
-      const answered = Object.keys(data.quizAnswers).length;
-      const total = data.totalQuestions || data.quizTotal || 0;
-      return {answered, total};
+    .intro {
+      max-width: 760px;
+      margin-bottom: 32px;
+      color: #3d3530;
     }
 
-    return null;
-  }catch(e){
-    return null;
-  }
-}
-
-function renderGrid(){
-  const grid = document.getElementById("chapterGrid");
-  let totalAnswered = 0;
-  let totalQuestions = 0;
-  let started = 0;
-
-  grid.innerHTML = chapters.map(ch => {
-    const prog = readProgress(ch.key);
-    let pct = 0;
-    let statusLabel = "not started";
-    let statusClass = "";
-    let barClass = "";
-
-    if(prog){
-      if(prog.answered > 0) started++;
-
-      if(prog.total > 0){
-        pct = Math.round((prog.answered / prog.total) * 100);
-        totalAnswered += prog.answered;
-        totalQuestions += prog.total;
-
-        if(pct >= 100){
-          statusLabel = "complete";
-          statusClass = "done";
-          barClass = "done";
-        } else if(pct > 0){
-          statusLabel = `${pct}%`;
-          statusClass = "partial";
-          barClass = "partial";
-        }
-      } else if(prog.answered > 0){
-        statusLabel = "started";
-        statusClass = "partial";
-        barClass = "partial";
-        pct = 20;
-      }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
     }
 
-    const cardClass = pct >= 100 ? "complete" : (pct > 0 ? "in-progress" : "");
+    .card {
+      background: #ffffff;
+      border: 1px solid #d4c8a8;
+      border-radius: 10px;
+      padding: 20px;
+      text-decoration: none;
+      color: #1a1612;
+      display: block;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
 
-    return `<a class="chapter-card ${cardClass}" href="${ch.file}">
-      <div class="ch-row1">
-        <span class="ch-num">Ch. ${ch.n} · ${ch.roman}</span>
-        <span class="ch-status ${statusClass}">${statusLabel}</span>
-      </div>
-      <div class="ch-title">${ch.title}</div>
-      <div class="ch-desc">${ch.desc}</div>
-      <div class="ch-progress">
-        <div class="ch-pbar"><div class="ch-pfill ${barClass}" style="width:${pct}%"></div></div>
-        <span>${prog && prog.total > 0 ? `${prog.answered}/${prog.total}` : "—"}</span>
-      </div>
-    </a>`;
-  }).join("");
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+    }
 
-  const activeChapters = chapters.length;
-  const overallPct = totalQuestions ? Math.round((totalAnswered / totalQuestions) * 100) : 0;
+    .chapter {
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #7d5a0e;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
 
-  document.getElementById("overallPct").textContent = overallPct + "%";
-  document.getElementById("overallFill").style.width = overallPct + "%";
+    .title {
+      font-size: 1.15rem;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
 
-  const questionText = totalQuestions > 0
-    ? ` · ${totalAnswered} of ${totalQuestions} questions answered`
-    : "";
+    .desc {
+      font-size: 0.9rem;
+      color: #3d3530;
+    }
 
-  document.getElementById("overallDesc").textContent =
-    `${started} of ${activeChapters} chapters started${questionText}`;
-}
+    .note {
+      margin-top: 36px;
+      font-size: 0.85rem;
+      color: #5a5048;
+    }
+  </style>
+</head>
+<body>
 
-function resetAllProgress(){
-  if(!confirm("This will clear all quiz progress and workshop responses across all chapters. Continue?")) return;
+  <h1>AI-Integrated Educational Examples</h1>
 
-  chapters.forEach(ch => {
-    if(ch.key) localStorage.removeItem(ch.key);
-  });
+  <p class="intro">
+    Selected interactive educational examples developed by the Financial Intelligence for Consumer Well-being Lab.
+    These modules demonstrate how interactive and AI-integrated learning materials can support financial services
+    education, ethics training, and applied client-case analysis.
+  </p>
 
-  renderGrid();
-}
+  <div class="grid">
 
-renderGrid();
+    <a class="card" href="Ch01/index.html">
+      <div class="chapter">Chapter 1</div>
+      <div class="title">Introduction to Ethics</div>
+      <div class="desc">Foundational definitions, frameworks, and the language of ethical practice in financial services.</div>
+    </a>
 
-window.addEventListener("focus", renderGrid);
-window.addEventListener("pageshow", renderGrid);
-</script>
+    <a class="card" href="Ch02/index.html">
+      <div class="chapter">Chapter 2</div>
+      <div class="title">Ethical Theories</div>
+      <div class="desc">Utilitarianism, deontology, virtue ethics, fiduciary principles, and ethical reasoning.</div>
+    </a>
+
+    <a class="card" href="Ch03/index.html">
+      <div class="chapter">Chapter 3</div>
+      <div class="title">Ethical Decision-Making</div>
+      <div class="desc">Structured decision-making frameworks and applied professional judgment.</div>
+    </a>
+
+    <a class="card" href="Ch04/index.html">
+      <div class="chapter">Chapter 4</div>
+      <div class="title">The Ethical Mind</div>
+      <div class="desc">Behavioral and psychological foundations of ethical and unethical decision-making.</div>
+    </a>
+
+    <a class="card" href="Ch05/index.html">
+      <div class="chapter">Chapter 5</div>
+      <div class="title">Regulatory Frameworks</div>
+      <div class="desc">Historical and institutional foundations of financial regulation.</div>
+    </a>
+
+    <a class="card" href="Ch06/index.html">
+      <div class="chapter">Chapter 6</div>
+      <div class="title">From Misconduct to Oversight</div>
+      <div class="desc">Regulatory enforcement, professional oversight, and misconduct prevention.</div>
+    </a>
+
+    <a class="card" href="Ch07/index.html">
+      <div class="chapter">Chapter 7</div>
+      <div class="title">Risk Mitigation</div>
+      <div class="desc">Controls, audits, governance, training, and compliance systems.</div>
+    </a>
+
+    <a class="card" href="Ch08/index.html">
+      <div class="chapter">Chapter 8</div>
+      <div class="title">Client-Facing Ethics</div>
+      <div class="desc">Integrity, fairness, accountability, and transparency in advisor-client relationships.</div>
+    </a>
+
+    <a class="card" href="Ch09/index.html">
+      <div class="chapter">Chapter 9</div>
+      <div class="title">Insider Trading and Market Manipulation</div>
+      <div class="desc">Ethical and regulatory issues involving market integrity.</div>
+    </a>
+
+    <a class="card" href="Ch10/index.html">
+      <div class="chapter">Chapter 10</div>
+      <div class="title">Data Privacy and Cybersecurity</div>
+      <div class="desc">Privacy, cybersecurity, data governance, and client protection.</div>
+    </a>
+
+    <a class="card" href="Ch11/index.html">
+      <div class="chapter">Chapter 11</div>
+      <div class="title">Fair Treatment of Clients</div>
+      <div class="desc">Procedural, interactional, and distributive fairness in financial services.</div>
+    </a>
+
+    <a class="card" href="Ch12/index.html">
+      <div class="chapter">Chapter 12</div>
+      <div class="title">Firm-Level Ethics and Culture</div>
+      <div class="desc">Organizational culture, incentives, governance, and leadership.</div>
+    </a>
+
+    <a class="card" href="Ch13/index.html">
+      <div class="chapter">Chapter 13</div>
+      <div class="title">Developing an Ethical Firm Culture</div>
+      <div class="desc">Practical approaches to building and sustaining ethical firm culture.</div>
+    </a>
+
+    <a class="card" href="Ch14/index.html">
+      <div class="chapter">Chapter 14</div>
+      <div class="title">Emerging Trends</div>
+      <div class="desc">AI, RegTech, distributed ledger technology, open banking, and cloud systems.</div>
+    </a>
+
+    <a class="card" href="Ch15/index.html">
+      <div class="chapter">Chapter 15</div>
+      <div class="title">Ethics in a Digital Age</div>
+      <div class="desc">Technology governance, AI oversight, and digital-age compliance challenges.</div>
+    </a>
+
+    <a class="card" href="Ch16/index.html">
+      <div class="chapter">Chapter 16</div>
+      <div class="title">Conclusion and Future Directions</div>
+      <div class="desc">Integrating ethics, compliance, professional responsibility, and future practice.</div>
+    </a>
+
+  </div>
+
+  <p class="note">
+    These sample modules are working examples and may be updated over time.
+  </p>
+
+</body>
+</html>
