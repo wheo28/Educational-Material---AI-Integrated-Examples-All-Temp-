@@ -1,21 +1,133 @@
 <script>
 const chapters = [
-  {n:1,  roman:"I",    file:"Ch01/", title:"Introduction to <em>Ethics</em>", desc:"Foundational definitions, frameworks, and the language of ethical practice in financial services.", key:"csr481_ch01_v1"},
-  {n:2,  roman:"II",   file:"Ch02/", title:"Ethical <em>Theories</em>", desc:"Utilitarianism, deontology, virtue ethics, fiduciary principles — the four lenses for analysing dilemmas.", key:"csr481_ch02_v1"},
-  {n:3,  roman:"III",  file:"Ch03/", title:"Ethical <em>Decision-Making</em>", desc:"Johnson's five-step model, public-disclosure / role-model / empathy tests, and structured ethical reasoning.", key:"csr481_ch03_v1"},
-  {n:4,  roman:"IV",   file:"Ch04/", title:"The <em>Ethical Mind</em>", desc:"Fraud Triangle and Fraud Diamond — pressure, opportunity, rationalisation, and capability.", key:"csr481_ch04_v1"},
-  {n:5,  roman:"V",    file:"Ch05/", title:"<em>Regulatory</em> Frameworks", desc:"From the Securities Act through Dodd-Frank — how U.S. financial regulation evolved.", key:"csr481_ch05_v1"},
-  {n:6,  roman:"VI",   file:"Ch06/", title:"From Misconduct to <em>Oversight</em>", desc:"SEC, FINRA, CFP Board, state regulators — who enforces what, and through what mechanisms.", key:"csr481_ch06_v1"},
-  {n:7,  roman:"VII",  file:"Ch07/", title:"<em>Risk Mitigation</em>", desc:"How firms operationalise compliance through controls, audits, training, governance, and leadership.", key:"csr481_ch07_v1"},
-  {n:8,  roman:"VIII", file:"Ch08/", title:"<em>Client-Facing</em> Ethics", desc:"Integrity, fairness, accountability, and transparency — the four pillars of advisor practice.", key:"csr481_ch08_v1"},
-  {n:9,  roman:"IX",   file:"Ch09/", title:"Insider Trading &amp; <em>Market Manipulation</em>", desc:"From insider information to market distortion — conduct, law, and enforcement.", key:"csr481_ch09_v1"},
-  {n:10, roman:"X",    file:"Ch10/", title:"<em>Data Privacy</em> &amp; Cybersecurity", desc:"GLBA, CCPA, GDPR, DORA, cybersecurity principles, and major breach cases.", key:"csr481_ch10_v1"},
-  {n:11, roman:"XI",   file:"Ch11/", title:"<em>Fair Treatment</em> of Clients", desc:"Procedural, interactional, and distributive fairness — operationalising what fairness looks like.", key:"csr481_ch11_v1"},
-  {n:12, roman:"XII",  file:"Ch12/", title:"Firm-Level <em>Ethics</em> &amp; Culture", desc:"How organizational culture, incentives, governance, and leadership shape ethical conduct.", key:"csr481_ch12_v1"},
-  {n:13, roman:"XIII", file:"Ch13/", title:"Developing an <em>Ethical Firm Culture</em>", desc:"Jondle &amp; Mitchell's five attributes, turnaround cases, and structural levers for culture.", key:"csr481_ch13_v1"},
-  {n:14, roman:"XIV",  file:"Ch14/", title:"<em>Emerging Trends</em>", desc:"AI/ML, RegTech, DLT, Open Banking, Cloud — five technologies and five behavioural dynamics.", key:"csr481_ch14_v1"},
-  {n:15, roman:"XV",   file:"Ch15/", title:"<em>Ethics</em> in a Digital Age", desc:"The SR 11-7 control loop, EU AI Act, DORA, UK Consumer Duty, and CFPB §1033.", key:"csr481_ch15_v1"},
-  {n:16, roman:"XVI",  file:"Ch16/", title:"<em>Conclusion</em> &amp; Future Directions", desc:"Nine integrating themes and three capstone cases that connect ethics, compliance, and technology.", key:"csr481_ch16_v1"}
+  {
+    n:1,
+    roman:"I",
+    file:"Ch01/",
+    title:"Introduction to <em>Ethics</em>",
+    desc:"Foundational definitions, frameworks, and the language of ethical practice in financial services.",
+    key:"csr481_ch01_v1"
+  },
+  {
+    n:2,
+    roman:"II",
+    file:"Ch02/",
+    title:"Ethical <em>Theories</em>",
+    desc:"Utilitarianism, deontology, virtue ethics, fiduciary principles — the four lenses for analysing dilemmas.",
+    key:"csr481_ch02_v1"
+  },
+  {
+    n:3,
+    roman:"III",
+    file:"Ch03/",
+    title:"Ethical <em>Decision-Making</em>",
+    desc:"Johnson's five-step model, public-disclosure, role-model, empathy tests, and structured reasoning.",
+    key:"csr481_ch03_v1"
+  },
+  {
+    n:4,
+    roman:"IV",
+    file:"Ch04/",
+    title:"The <em>Ethical Mind</em>",
+    desc:"Fraud Triangle and Fraud Diamond — pressure, opportunity, rationalisation, and capability.",
+    key:"csr481_ch04_v1"
+  },
+  {
+    n:5,
+    roman:"V",
+    file:"Ch05/",
+    title:"<em>Regulatory</em> Frameworks",
+    desc:"From the Securities Act through Dodd-Frank — how U.S. financial regulation evolved.",
+    key:"csr481_ch05_v1"
+  },
+  {
+    n:6,
+    roman:"VI",
+    file:"Ch06/",
+    title:"From Misconduct to <em>Oversight</em>",
+    desc:"SEC, FINRA, CFP Board, state regulators — who enforces what, and through what mechanisms.",
+    key:"csr481_ch06_v1"
+  },
+  {
+    n:7,
+    roman:"VII",
+    file:"Ch07/",
+    title:"<em>Risk Mitigation</em>",
+    desc:"How firms operationalise compliance through controls, audits, training, governance, and leadership.",
+    key:"csr481_ch07_v1"
+  },
+  {
+    n:8,
+    roman:"VIII",
+    file:"Ch08/",
+    title:"<em>Client-Facing</em> Ethics",
+    desc:"Integrity, fairness, accountability, and transparency — the four pillars of advisor practice.",
+    key:"csr481_ch08_v1"
+  },
+  {
+    n:9,
+    roman:"IX",
+    file:"Ch09/",
+    title:"Insider Trading &amp; <em>Market Manipulation</em>",
+    desc:"From insider information to market distortion — conduct, law, and enforcement.",
+    key:"csr481_ch09_v1"
+  },
+  {
+    n:10,
+    roman:"X",
+    file:"Ch10/",
+    title:"<em>Data Privacy</em> &amp; Cybersecurity",
+    desc:"GLBA, CCPA, GDPR, DORA, cybersecurity principles, and major breach cases.",
+    key:"csr481_ch10_v1"
+  },
+  {
+    n:11,
+    roman:"XI",
+    file:"Ch11/",
+    title:"<em>Fair Treatment</em> of Clients",
+    desc:"Procedural, interactional, and distributive fairness — operationalising what fairness looks like.",
+    key:"csr481_ch11_v1"
+  },
+  {
+    n:12,
+    roman:"XII",
+    file:"Ch12/",
+    title:"Firm-Level <em>Ethics</em> &amp; Culture",
+    desc:"Firm culture, incentives, governance, leadership, and organizational conditions that shape ethical conduct.",
+    key:"csr481_ch12_v1"
+  },
+  {
+    n:13,
+    roman:"XIII",
+    file:"Ch13/",
+    title:"Developing an <em>Ethical Firm Culture</em>",
+    desc:"Jondle &amp; Mitchell's five attributes, turnaround cases, and structural levers for culture.",
+    key:"csr481_ch13_v1"
+  },
+  {
+    n:14,
+    roman:"XIV",
+    file:"Ch14/",
+    title:"<em>Emerging Trends</em>",
+    desc:"AI/ML, RegTech, DLT, Open Banking, Cloud — five technologies and five behavioural dynamics.",
+    key:"csr481_ch14_v1"
+  },
+  {
+    n:15,
+    roman:"XV",
+    file:"Ch15/",
+    title:"<em>Ethics</em> in a Digital Age",
+    desc:"The SR 11-7 control loop, EU AI Act, DORA, UK Consumer Duty, and CFPB §1033.",
+    key:"csr481_ch15_v1"
+  },
+  {
+    n:16,
+    roman:"XVI",
+    file:"Ch16/",
+    title:"<em>Conclusion</em> &amp; Future Directions",
+    desc:"Nine integrating themes and capstone cases that connect ethics, compliance, and technology.",
+    key:"csr481_ch16_v1"
+  }
 ];
 
 function readProgress(key){
@@ -27,20 +139,20 @@ function readProgress(key){
 
     const data = JSON.parse(raw);
 
-    /*
-      Supports two possible chapter-storage formats:
-      1. { answers: {...}, totalQuestions: 20 }
-      2. { quizAnswers: {...}, quizSubmitted: {...}, totalQuestions: 20 }
-    */
-
     if(data.answers && typeof data.answers === "object"){
       const answered = Object.keys(data.answers).length;
-      const total = data.totalQuestions || 0;
+      const total = data.totalQuestions || data.quizTotal || 0;
       return {answered, total};
     }
 
     if(data.quizSubmitted && typeof data.quizSubmitted === "object"){
       const answered = Object.values(data.quizSubmitted).filter(Boolean).length;
+      const total = data.totalQuestions || data.quizTotal || 0;
+      return {answered, total};
+    }
+
+    if(data.quizAnswers && typeof data.quizAnswers === "object"){
+      const answered = Object.keys(data.quizAnswers).length;
       const total = data.totalQuestions || data.quizTotal || 0;
       return {answered, total};
     }
