@@ -1,534 +1,95 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CSR&nbsp;481 · Ethics &amp; Compliance in Financial Services — Interactive Companion</title>
-<meta name="description" content="Interactive learning companion to Heo &amp; Grable (2026), Ethics and Compliance in Financial Services. Designed for CSR 481 at Purdue University.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --ink:#1a1612;
-    --ink-soft:#3d3530;
-    --paper:#f7f2e8;
-    --paper-2:#efe7d4;
-    --rule:#d4c8a8;
-    --gold:#a37c1c;
-    --gold-deep:#7d5a0e;
-    --crimson:#8a1c1c;
-    --leaf:#5e6b3a;
-    --shadow: 0 2px 8px rgba(26,22,18,.06), 0 1px 3px rgba(26,22,18,.04);
-  }
-
-  *{box-sizing:border-box}
-  html,body{margin:0;padding:0}
-  body{
-    background:var(--paper);
-    color:var(--ink);
-    font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
-    line-height:1.55;
-    min-height:100vh;
-  }
-
-  ::selection{background:rgba(163,124,28,.25);color:var(--ink)}
-
-  /* ---- TYPOGRAPHY ---- */
-  h1,h2,h3,h4{font-family:'Fraunces',Georgia,serif;font-weight:600;color:var(--ink);letter-spacing:-.01em;margin:0}
-  h1{font-size:clamp(2.2rem,5vw,3.6rem);line-height:1.05;letter-spacing:-.02em}
-  h2{font-size:clamp(1.4rem,2.6vw,2rem);line-height:1.15}
-  h3{font-size:1.05rem;line-height:1.25}
-
-  em{font-style:italic;font-family:'Fraunces',Georgia,serif}
-  .mono{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.78em;letter-spacing:.02em}
-
-  /* ---- LAYOUT ---- */
-  .wrap{max-width:1180px;margin:0 auto;padding:0 clamp(1rem,3vw,2.5rem)}
-
-  /* ---- HEADER ---- */
-  header.masthead{
-    background:linear-gradient(180deg, var(--paper) 0%, var(--paper-2) 100%);
-    border-bottom:1px solid var(--rule);
-    padding:clamp(2rem,5vw,4rem) 0 clamp(1.5rem,4vw,3rem);
-    position:relative;
-  }
-  header.masthead::before{
-    content:"";
-    position:absolute;
-    top:0;left:0;right:0;height:3px;
-    background:linear-gradient(90deg, var(--gold) 0%, var(--gold-deep) 50%, var(--gold) 100%);
-  }
-  .crest{
-    display:flex;align-items:baseline;gap:.6rem;
-    margin-bottom:1.4rem;
-    font-family:'JetBrains Mono',monospace;
-    font-size:.72rem;
-    text-transform:uppercase;
-    letter-spacing:.18em;
-    color:var(--gold-deep);
-  }
-  .crest::before{
-    content:"✦";color:var(--gold);font-size:1rem;line-height:1;
-  }
-  .masthead h1 em{color:var(--gold-deep)}
-  .lede{
-    margin-top:1.2rem;
-    font-size:clamp(1rem,1.6vw,1.18rem);
-    line-height:1.55;
-    max-width:62ch;
-    color:var(--ink-soft);
-  }
-  .meta-row{
-    margin-top:1.6rem;
-    display:flex;flex-wrap:wrap;gap:1.2rem 2rem;
-    font-size:.85rem;color:var(--ink-soft);
-    padding-top:1.2rem;border-top:1px solid var(--rule);
-  }
-  .meta-row span strong{color:var(--ink);font-weight:600}
-
-  /* ---- PROGRESS BAR (overall) ---- */
-  .overall-progress{
-    margin-top:1.5rem;
-    display:flex;align-items:center;gap:1rem;
-    padding:.8rem 1rem;
-    background:rgba(255,255,255,.5);
-    border:1px solid var(--rule);
-    border-radius:6px;
-  }
-  .overall-progress .pct{
-    font-family:'Fraunces',serif;
-    font-size:1.6rem;
-    font-weight:600;
-    color:var(--gold-deep);
-    min-width:3.5rem;
-  }
-  .overall-progress .pbar{
-    flex:1;height:8px;background:var(--paper-2);
-    border:1px solid var(--rule);border-radius:4px;
-    overflow:hidden;
-  }
-  .overall-progress .pfill{
-    height:100%;background:linear-gradient(90deg,var(--gold) 0%,var(--gold-deep) 100%);
-    width:0%;transition:width .8s ease;
-  }
-  .overall-progress .desc{
-    font-size:.82rem;color:var(--ink-soft);
-    font-family:'JetBrains Mono',monospace;
-    letter-spacing:.02em;
-  }
-
-  /* ---- MAIN ---- */
-  main{padding:clamp(2rem,5vw,4rem) 0 clamp(3rem,6vw,5rem)}
-
-  .section-head{
-    display:flex;align-items:baseline;justify-content:space-between;
-    gap:1rem;flex-wrap:wrap;
-    margin-bottom:1.5rem;
-    padding-bottom:.7rem;border-bottom:2px solid var(--ink);
-  }
-  .section-head h2 .num{
-    font-family:'JetBrains Mono',monospace;
-    font-size:.8em;color:var(--gold-deep);
-    margin-right:.5rem;
-  }
-  .section-head .hint{
-    font-size:.78rem;color:var(--ink-soft);
-    font-family:'JetBrains Mono',monospace;
-    letter-spacing:.04em;
-  }
-
-  /* ---- CHAPTER GRID ---- */
-  .chapter-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(290px,1fr));
-    gap:1rem;
-    margin-bottom:3rem;
-  }
-
-  .chapter-card{
-    display:block;
-    background:#fff;
-    border:1px solid var(--rule);
-    border-radius:6px;
-    padding:1.2rem 1.3rem 1.1rem;
-    text-decoration:none;
-    color:var(--ink);
-    position:relative;
-    transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-    overflow:hidden;
-  }
-  .chapter-card::before{
-    content:"";
-    position:absolute;
-    left:0;top:0;bottom:0;width:3px;
-    background:var(--rule);
-    transition:background .18s ease;
-  }
-  .chapter-card:hover{
-    transform:translateY(-2px);
-    box-shadow:var(--shadow);
-    border-color:var(--gold);
-  }
-  .chapter-card:hover::before{background:var(--gold)}
-  .chapter-card.complete::before{background:var(--leaf)}
-  .chapter-card.in-progress::before{background:var(--gold)}
-
-  .ch-row1{
-    display:flex;align-items:center;justify-content:space-between;
-    margin-bottom:.6rem;
-  }
-  .ch-num{
-    font-family:'JetBrains Mono',monospace;
-    font-size:.72rem;
-    text-transform:uppercase;
-    letter-spacing:.16em;
-    color:var(--gold-deep);
-    font-weight:500;
-  }
-  .ch-status{
-    font-family:'JetBrains Mono',monospace;
-    font-size:.68rem;
-    text-transform:uppercase;
-    letter-spacing:.1em;
-    padding:.2rem .55rem;
-    border-radius:3px;
-    background:var(--paper-2);
-    color:var(--ink-soft);
-  }
-  .ch-status.done{background:rgba(94,107,58,.15);color:var(--leaf)}
-  .ch-status.partial{background:rgba(163,124,28,.18);color:var(--gold-deep)}
-
-  .ch-title{
-    font-family:'Fraunces',serif;
-    font-size:1.18rem;
-    font-weight:600;
-    line-height:1.25;
-    margin-bottom:.5rem;
-    color:var(--ink);
-  }
-  .ch-title em{color:var(--gold-deep);font-weight:500}
-  .ch-desc{
-    font-size:.84rem;
-    line-height:1.5;
-    color:var(--ink-soft);
-    margin-bottom:.9rem;
-    min-height:2.5em;
-  }
-
-  .ch-progress{
-    display:flex;align-items:center;gap:.6rem;
-    font-size:.72rem;
-    color:var(--ink-soft);
-    font-family:'JetBrains Mono',monospace;
-  }
-  .ch-pbar{
-    flex:1;height:4px;background:var(--paper-2);
-    border-radius:2px;overflow:hidden;
-  }
-  .ch-pfill{
-    height:100%;background:var(--rule);
-    width:0%;transition:width .6s ease;
-  }
-  .ch-pfill.done{background:var(--leaf)}
-  .ch-pfill.partial{background:var(--gold)}
-
-  /* skip notice card */
-  .chapter-card.skipped{
-    background:transparent;
-    border-style:dashed;
-    opacity:.55;
-    pointer-events:none;
-  }
-  .chapter-card.skipped::before{display:none}
-  .chapter-card.skipped .ch-status{background:transparent;color:var(--ink-soft)}
-
-  /* ---- ARC SECTION (3-arc structure) ---- */
-  .arcs{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:1.4rem;
-    margin-bottom:3rem;
-  }
-  .arc{
-    padding:1.4rem 1.5rem;
-    background:#fff;
-    border:1px solid var(--rule);
-    border-radius:6px;
-    position:relative;
-  }
-  .arc::before{
-    content:"";
-    position:absolute;
-    top:0;left:1.4rem;right:1.4rem;
-    height:3px;
-    background:var(--gold);
-  }
-  .arc h3{
-    font-size:1.15rem;
-    margin-bottom:.4rem;
-  }
-  .arc .arc-num{
-    font-family:'JetBrains Mono',monospace;
-    font-size:.7rem;
-    text-transform:uppercase;
-    letter-spacing:.15em;
-    color:var(--gold-deep);
-    margin-bottom:.5rem;
-    display:block;
-  }
-  .arc .arc-chapters{
-    font-family:'JetBrains Mono',monospace;
-    font-size:.78rem;
-    color:var(--ink-soft);
-    margin:.8rem 0 .9rem;
-    padding:.5rem .7rem;
-    background:var(--paper);
-    border-left:2px solid var(--gold);
-    border-radius:0 3px 3px 0;
-  }
-  .arc p{
-    font-size:.88rem;
-    line-height:1.55;
-    color:var(--ink-soft);
-    margin:0;
-  }
-
-  /* ---- ABOUT ---- */
-  .about{
-    background:#fff;
-    border:1px solid var(--rule);
-    border-radius:6px;
-    padding:clamp(1.5rem,3vw,2.4rem);
-    margin-bottom:3rem;
-  }
-  .about p{
-    font-size:.95rem;line-height:1.65;
-    color:var(--ink-soft);
-    margin:0 0 1rem;
-  }
-  .about p:last-child{margin-bottom:0}
-  .about .citation{
-    font-family:'JetBrains Mono',monospace;
-    font-size:.78rem;
-    padding:.8rem 1rem;
-    background:var(--paper);
-    border-left:2px solid var(--gold);
-    margin:1.2rem 0;
-    color:var(--ink);
-    line-height:1.6;
-  }
-  .about .reset-btn{
-    margin-top:1.2rem;
-    font-family:'JetBrains Mono',monospace;
-    font-size:.75rem;
-    padding:.5rem 1rem;
-    background:transparent;
-    border:1px solid var(--rule);
-    color:var(--ink-soft);
-    border-radius:3px;
-    cursor:pointer;
-    letter-spacing:.06em;
-    transition:all .15s ease;
-  }
-  .about .reset-btn:hover{
-    border-color:var(--crimson);
-    color:var(--crimson);
-  }
-
-  /* ---- FOOTER ---- */
-  footer{
-    border-top:1px solid var(--rule);
-    background:var(--paper-2);
-    padding:2rem 0;
-    font-size:.82rem;
-    color:var(--ink-soft);
-  }
-  footer .wrap{
-    display:flex;flex-wrap:wrap;gap:1.5rem;
-    justify-content:space-between;align-items:baseline;
-  }
-  footer .quote{
-    font-family:'Fraunces',serif;
-    font-style:italic;
-    font-size:.95rem;
-    color:var(--ink);
-    max-width:36ch;
-  }
-  footer .meta{
-    font-family:'JetBrains Mono',monospace;
-    font-size:.72rem;
-    letter-spacing:.04em;
-  }
-
-  @media (max-width:640px){
-    .meta-row{gap:.6rem 1.2rem;font-size:.8rem}
-    .ch-desc{min-height:auto}
-  }
-</style>
-</head>
-<body>
-
-<header class="masthead">
-  <div class="wrap">
-    <div class="crest">CSR&nbsp;481 · Purdue University · Spring 2026</div>
-    <h1>Ethics &amp; Compliance in <em>Financial Services</em></h1>
-    <p class="lede">An interactive learning companion to <em>Heo &amp; Grable (2026)</em>. Sixteen chapters on ethical theory, regulatory architecture, behavioural risk, and emerging technology — assembled into a single integrated curriculum.</p>
-
-    <div class="meta-row">
-      <span><strong>Textbook:</strong> Heo, W. &amp; Grable, J. E. (2026). Springer Nature</span>
-      <span><strong>Course:</strong> CSR&nbsp;481 — Capstone</span>
-      <span><strong>Lab:</strong> FinE Lab (Financial Intelligence for Consumer Well-being)</span>
-    </div>
-
-    <div class="overall-progress" id="overallBar">
-      <div class="pct" id="overallPct">0%</div>
-      <div class="pbar"><div class="pfill" id="overallFill"></div></div>
-      <div class="desc" id="overallDesc">0 of 15 chapters started</div>
-    </div>
-  </div>
-</header>
-
-<main>
-  <div class="wrap">
-
-    <!-- ARC OVERVIEW -->
-    <section>
-      <div class="section-head">
-        <h2><span class="num">I.</span> The Three Arcs</h2>
-        <span class="hint">how 16 chapters cohere</span>
-      </div>
-      <div class="arcs">
-        <div class="arc">
-          <span class="arc-num">Arc 1</span>
-          <h3>Foundations &amp; Behavioural Insight</h3>
-          <div class="arc-chapters">Chs. 1 — 4</div>
-          <p>Ethical theory grounded in established norms — utilitarianism, deontology, virtue ethics, fiduciary principles. Then the psychological and behavioural perspectives: moral disengagement, ethical fading, overconfidence. Why misconduct can occur even among well-intentioned professionals.</p>
-        </div>
-        <div class="arc">
-          <span class="arc-num">Arc 2</span>
-          <h3>Regulatory Architecture &amp; Specific Risks</h3>
-          <div class="arc-chapters">Chs. 5 — 11</div>
-          <p>From historical regulatory development (Securities Act, IAA, Dodd-Frank) through specific ethical concerns: misconduct, risk mitigation, client-facing roles, insider trading, market manipulation, data privacy, and fair treatment of clients.</p>
-        </div>
-        <div class="arc">
-          <span class="arc-num">Arc 3</span>
-          <h3>Firm Culture &amp; Technology Adoption</h3>
-          <div class="arc-chapters">Chs. 12 — 16</div>
-          <p>Ethical firm culture as strategic imperative beyond compliance. Five core technologies (AI/ML, RegTech, DLT, Open Banking, Cloud/SaaS). The SR 11-7 control loop. Three capstone cases that integrate everything.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- CHAPTER GRID -->
-    <section>
-      <div class="section-head">
-        <h2><span class="num">II.</span> Chapters</h2>
-        <span class="hint">tap a chapter to enter</span>
-      </div>
-      <div class="chapter-grid" id="chapterGrid"></div>
-    </section>
-
-    <!-- ABOUT -->
-    <section>
-      <div class="section-head">
-        <h2><span class="num">III.</span> About this Companion</h2>
-      </div>
-      <div class="about">
-        <p>This interactive companion turns each textbook chapter into a five-tab learning environment: Concept Map (with expandable details), Frameworks &amp; Cases (the chapter's anchor cases), Knowledge Check (quiz with progress tracking), Case Workshop (discussion-guide scenarios with auto-saving textareas), and a chapter-specific Identifier (drag-or-tap matching exercise).</p>
-        <p>Quiz progress and workshop responses save automatically to your browser's local storage. They are private to your device and never transmitted anywhere. Clearing your browser data will reset them.</p>
-
-        <div class="citation">Heo, W., &amp; Grable, J. E. (2026). <em>Ethics and Compliance in Financial Services: Case Studies and Practical Examples from North America.</em> Springer Nature Switzerland. https://doi.org/10.1007/978-3-032-14449-2</div>
-
-        <p>Designed for use in CSR&nbsp;481 at Purdue University and openly available to financial-services educators worldwide. Built at the FinE Lab — Financial Intelligence for Consumer Well-being.</p>
-
-        <button class="reset-btn" onclick="resetAllProgress()">↻ Reset all chapter progress</button>
-      </div>
-    </section>
-
-  </div>
-</main>
-
-<footer>
-  <div class="wrap">
-    <div class="quote">“Trust is the profession's currency. Once broken, it is exceedingly difficult to restore.”</div>
-    <div class="meta">CSR&nbsp;481 · Purdue · Spring 2026 · Heo &amp; Grable</div>
-  </div>
-</footer>
-
 <script>
 const chapters = [
-  {n:1,  roman:"I",   file:"CSR481_Ch01_Interactive.html", title:"Introduction to <em>Ethics</em>", desc:"Foundational definitions, frameworks, and the language of ethical practice in financial services.", key:"csr481_ch01_v1"},
-  {n:2,  roman:"II",  file:"CSR481_Ch02_Interactive.html", title:"Ethical <em>Theories</em>", desc:"Utilitarianism, deontology, virtue ethics, fiduciary principles — the four lenses for analysing dilemmas.", key:"csr481_ch02_v1"},
-  {n:3,  roman:"III", file:"CSR481_Ch03_Interactive.html", title:"Ethical <em>Decision-Making</em>", desc:"Johnson's five-step model, public-disclosure / role-model / empathy tests, structured reasoning.", key:"csr481_ch03_v1"},
-  {n:4,  roman:"IV",  file:"CSR481_Ch04_Interactive.html", title:"The <em>Ethical Mind</em>", desc:"Fraud Triangle and Fraud Diamond — pressure, opportunity, rationalisation, capability.", key:"csr481_ch04_v1"},
-  {n:5,  roman:"V",   file:"CSR481_Ch05_Interactive.html", title:"<em>Regulatory</em> Frameworks", desc:"From the Securities Act through Dodd-Frank — how US financial regulation evolved.", key:"csr481_ch05_v1"},
-  {n:6,  roman:"VI",  file:"CSR481_Ch06_Interactive.html", title:"From Misconduct to <em>Oversight</em>", desc:"SEC, FINRA, CFP Board, state regulators — who enforces what, and through what mechanisms.", key:"csr481_ch06_v1"},
-  {n:7,  roman:"VII", file:"CSR481_Ch07_Interactive.html", title:"<em>Risk Mitigation</em>", desc:"How firms operationalise compliance — controls, audits, training, governance, leadership.", key:"csr481_ch07_v1"},
-  {n:8,  roman:"VIII",file:"CSR481_Ch08_Interactive.html", title:"<em>Client-Facing</em> Ethics", desc:"Integrity, fairness, accountability, transparency — the four pillars of advisor practice.", key:"csr481_ch08_v1"},
-  {n:9,  roman:"IX",  file:"CSR481_Ch09_Interactive.html", title:"Insider Trading &amp; <em>Market Manipulation</em>", desc:"From Galleon Group through GameStop — the conduct, the law, the enforcement.", key:"csr481_ch09_v1"},
-  {n:10, roman:"X",   file:"CSR481_Ch10_Interactive.html", title:"<em>Data Privacy</em> &amp; Cybersecurity", desc:"GLBA, CCPA, GDPR, DORA, the CIA model, and four landmark breach cases.", key:"csr481_ch10_v1"},
-  {n:11, roman:"XI",  file:"CSR481_Ch11_Interactive.html", title:"<em>Fair Treatment</em> of Clients", desc:"Procedural, interactional, and distributive fairness — operationalising what fairness looks like.", key:"csr481_ch11_v1"},
-  {n:12, skipped:true, title:"<em>(Skipped)</em>", desc:"This chapter is not covered in the current CSR 481 curriculum."},
-  {n:13, roman:"XIII",file:"CSR481_Ch13_Interactive.html", title:"Developing an <em>Ethical Firm Culture</em>", desc:"Jondle &amp; Mitchell's five attributes, three turnaround cases, structural levers for culture.", key:"csr481_ch13_v1"},
-  {n:14, roman:"XIV", file:"CSR481_Ch14_Interactive.html", title:"<em>Emerging Trends</em>", desc:"AI/ML, RegTech, DLT, Open Banking, Cloud — five technologies and five behavioural dynamics.", key:"csr481_ch14_v1"},
-  {n:15, roman:"XV",  file:"CSR481_Ch15_Interactive.html", title:"<em>Ethics</em> in a Digital Age", desc:"The SR 11-7 control loop. EU AI Act, DORA, UK Consumer Duty, CFPB §1033.", key:"csr481_ch15_v1"},
-  {n:16, roman:"XVI", file:"CSR481_Ch16_Interactive.html", title:"<em>Conclusion</em> &amp; Future Directions", desc:"Nine integrating themes. Three capstone cases — BrightFuture, GlobalTrust, SafeHaven.", key:"csr481_ch16_v1"}
+  {n:1,  roman:"I",    file:"Ch01/", title:"Introduction to <em>Ethics</em>", desc:"Foundational definitions, frameworks, and the language of ethical practice in financial services.", key:"csr481_ch01_v1"},
+  {n:2,  roman:"II",   file:"Ch02/", title:"Ethical <em>Theories</em>", desc:"Utilitarianism, deontology, virtue ethics, fiduciary principles — the four lenses for analysing dilemmas.", key:"csr481_ch02_v1"},
+  {n:3,  roman:"III",  file:"Ch03/", title:"Ethical <em>Decision-Making</em>", desc:"Johnson's five-step model, public-disclosure / role-model / empathy tests, and structured ethical reasoning.", key:"csr481_ch03_v1"},
+  {n:4,  roman:"IV",   file:"Ch04/", title:"The <em>Ethical Mind</em>", desc:"Fraud Triangle and Fraud Diamond — pressure, opportunity, rationalisation, and capability.", key:"csr481_ch04_v1"},
+  {n:5,  roman:"V",    file:"Ch05/", title:"<em>Regulatory</em> Frameworks", desc:"From the Securities Act through Dodd-Frank — how U.S. financial regulation evolved.", key:"csr481_ch05_v1"},
+  {n:6,  roman:"VI",   file:"Ch06/", title:"From Misconduct to <em>Oversight</em>", desc:"SEC, FINRA, CFP Board, state regulators — who enforces what, and through what mechanisms.", key:"csr481_ch06_v1"},
+  {n:7,  roman:"VII",  file:"Ch07/", title:"<em>Risk Mitigation</em>", desc:"How firms operationalise compliance through controls, audits, training, governance, and leadership.", key:"csr481_ch07_v1"},
+  {n:8,  roman:"VIII", file:"Ch08/", title:"<em>Client-Facing</em> Ethics", desc:"Integrity, fairness, accountability, and transparency — the four pillars of advisor practice.", key:"csr481_ch08_v1"},
+  {n:9,  roman:"IX",   file:"Ch09/", title:"Insider Trading &amp; <em>Market Manipulation</em>", desc:"From insider information to market distortion — conduct, law, and enforcement.", key:"csr481_ch09_v1"},
+  {n:10, roman:"X",    file:"Ch10/", title:"<em>Data Privacy</em> &amp; Cybersecurity", desc:"GLBA, CCPA, GDPR, DORA, cybersecurity principles, and major breach cases.", key:"csr481_ch10_v1"},
+  {n:11, roman:"XI",   file:"Ch11/", title:"<em>Fair Treatment</em> of Clients", desc:"Procedural, interactional, and distributive fairness — operationalising what fairness looks like.", key:"csr481_ch11_v1"},
+  {n:12, roman:"XII",  file:"Ch12/", title:"Firm-Level <em>Ethics</em> &amp; Culture", desc:"How organizational culture, incentives, governance, and leadership shape ethical conduct.", key:"csr481_ch12_v1"},
+  {n:13, roman:"XIII", file:"Ch13/", title:"Developing an <em>Ethical Firm Culture</em>", desc:"Jondle &amp; Mitchell's five attributes, turnaround cases, and structural levers for culture.", key:"csr481_ch13_v1"},
+  {n:14, roman:"XIV",  file:"Ch14/", title:"<em>Emerging Trends</em>", desc:"AI/ML, RegTech, DLT, Open Banking, Cloud — five technologies and five behavioural dynamics.", key:"csr481_ch14_v1"},
+  {n:15, roman:"XV",   file:"Ch15/", title:"<em>Ethics</em> in a Digital Age", desc:"The SR 11-7 control loop, EU AI Act, DORA, UK Consumer Duty, and CFPB §1033.", key:"csr481_ch15_v1"},
+  {n:16, roman:"XVI",  file:"Ch16/", title:"<em>Conclusion</em> &amp; Future Directions", desc:"Nine integrating themes and three capstone cases that connect ethics, compliance, and technology.", key:"csr481_ch16_v1"}
 ];
 
 function readProgress(key){
   if(!key) return null;
+
   try{
     const raw = localStorage.getItem(key);
     if(!raw) return null;
+
     const data = JSON.parse(raw);
-    // chapter HTMLs store quiz answers under data.answers (object keyed by question index)
-    // count answered vs total
-    if(data && data.answers && typeof data.answers === 'object'){
+
+    /*
+      Supports two possible chapter-storage formats:
+      1. { answers: {...}, totalQuestions: 20 }
+      2. { quizAnswers: {...}, quizSubmitted: {...}, totalQuestions: 20 }
+    */
+
+    if(data.answers && typeof data.answers === "object"){
       const answered = Object.keys(data.answers).length;
       const total = data.totalQuestions || 0;
       return {answered, total};
     }
+
+    if(data.quizSubmitted && typeof data.quizSubmitted === "object"){
+      const answered = Object.values(data.quizSubmitted).filter(Boolean).length;
+      const total = data.totalQuestions || data.quizTotal || 0;
+      return {answered, total};
+    }
+
     return null;
-  }catch(e){ return null }
+  }catch(e){
+    return null;
+  }
 }
 
 function renderGrid(){
-  const grid = document.getElementById('chapterGrid');
-  let totalAnswered=0, totalQuestions=0, started=0;
+  const grid = document.getElementById("chapterGrid");
+  let totalAnswered = 0;
+  let totalQuestions = 0;
+  let started = 0;
 
   grid.innerHTML = chapters.map(ch => {
-    if(ch.skipped){
-      return `<div class="chapter-card skipped">
-        <div class="ch-row1">
-          <span class="ch-num">Ch. ${ch.n}</span>
-          <span class="ch-status">not in curriculum</span>
-        </div>
-        <div class="ch-title">${ch.title}</div>
-        <div class="ch-desc">${ch.desc}</div>
-      </div>`;
-    }
-
     const prog = readProgress(ch.key);
-    let pct = 0, statusLabel = 'not started', statusClass = '', barClass = '';
+    let pct = 0;
+    let statusLabel = "not started";
+    let statusClass = "";
+    let barClass = "";
 
-    if(prog && prog.total > 0){
-      pct = Math.round((prog.answered / prog.total) * 100);
-      totalAnswered += prog.answered;
-      totalQuestions += prog.total;
+    if(prog){
       if(prog.answered > 0) started++;
-      if(pct >= 100){
-        statusLabel = 'complete';
-        statusClass = 'done';
-        barClass = 'done';
-      } else if(pct > 0){
-        statusLabel = `${pct}%`;
-        statusClass = 'partial';
-        barClass = 'partial';
+
+      if(prog.total > 0){
+        pct = Math.round((prog.answered / prog.total) * 100);
+        totalAnswered += prog.answered;
+        totalQuestions += prog.total;
+
+        if(pct >= 100){
+          statusLabel = "complete";
+          statusClass = "done";
+          barClass = "done";
+        } else if(pct > 0){
+          statusLabel = `${pct}%`;
+          statusClass = "partial";
+          barClass = "partial";
+        }
+      } else if(prog.answered > 0){
+        statusLabel = "started";
+        statusClass = "partial";
+        barClass = "partial";
+        pct = 20;
       }
     }
 
-    const cardClass = pct>=100 ? 'complete' : (pct>0 ? 'in-progress' : '');
+    const cardClass = pct >= 100 ? "complete" : (pct > 0 ? "in-progress" : "");
 
     return `<a class="chapter-card ${cardClass}" href="${ch.file}">
       <div class="ch-row1">
@@ -539,30 +100,37 @@ function renderGrid(){
       <div class="ch-desc">${ch.desc}</div>
       <div class="ch-progress">
         <div class="ch-pbar"><div class="ch-pfill ${barClass}" style="width:${pct}%"></div></div>
-        <span>${prog ? `${prog.answered}/${prog.total}` : '—'}</span>
+        <span>${prog && prog.total > 0 ? `${prog.answered}/${prog.total}` : "—"}</span>
       </div>
     </a>`;
-  }).join('');
+  }).join("");
 
-  // overall
-  const activeChapters = chapters.filter(c => !c.skipped).length;
-  const overallPct = totalQuestions ? Math.round((totalAnswered/totalQuestions)*100) : 0;
-  document.getElementById('overallPct').textContent = overallPct + '%';
-  document.getElementById('overallFill').style.width = overallPct + '%';
-  document.getElementById('overallDesc').textContent =
-    `${started} of ${activeChapters} chapters started · ${totalAnswered} of ${totalQuestions} questions answered`;
+  const activeChapters = chapters.length;
+  const overallPct = totalQuestions ? Math.round((totalAnswered / totalQuestions) * 100) : 0;
+
+  document.getElementById("overallPct").textContent = overallPct + "%";
+  document.getElementById("overallFill").style.width = overallPct + "%";
+
+  const questionText = totalQuestions > 0
+    ? ` · ${totalAnswered} of ${totalQuestions} questions answered`
+    : "";
+
+  document.getElementById("overallDesc").textContent =
+    `${started} of ${activeChapters} chapters started${questionText}`;
 }
 
 function resetAllProgress(){
-  if(!confirm('This will clear all quiz progress and workshop responses across all chapters. Continue?')) return;
-  chapters.forEach(ch => { if(ch.key) localStorage.removeItem(ch.key); });
+  if(!confirm("This will clear all quiz progress and workshop responses across all chapters. Continue?")) return;
+
+  chapters.forEach(ch => {
+    if(ch.key) localStorage.removeItem(ch.key);
+  });
+
   renderGrid();
 }
 
 renderGrid();
-// re-read when user returns from a chapter
-window.addEventListener('focus', renderGrid);
-window.addEventListener('pageshow', renderGrid);
+
+window.addEventListener("focus", renderGrid);
+window.addEventListener("pageshow", renderGrid);
 </script>
-</body>
-</html>
